@@ -16,12 +16,17 @@ public class CategoriaService {
 	private CategoriaRepository categoriaRepository;
 	
 	public List<Categoria> findAll(){
-		List<Categoria> categorias = this.categoriaRepository.findAll();
+		List<Categoria> list = this.categoriaRepository.findAll();
+		return list;
+	}
+	
+	public Categoria findById(Integer id){
+		Categoria obj = this.categoriaRepository.findOne(id);
 		
-		if(categorias.isEmpty())
-			throw new ObjectNotFoundException("Base de dados está vazia. Tipo: " + List.class.getName() + " " + Categoria.class.getName());
+		if(obj == null)
+			throw new ObjectNotFoundException("Objeto não encontrado");
 		
-		return categorias;
+		return obj;
 	}
 
 }
